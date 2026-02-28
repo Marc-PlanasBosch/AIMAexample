@@ -28,9 +28,17 @@ public class ProbIA5Board {
 
     }
 
+    /** Volteja 2 monedes consecutives (posicions i i i+1, circular) */
     public void flip_it(int i){
-        board[i] = 1 - board[i];
-        board[(i + 1) % board.length] = 1 - board[(i + 1) % board.length];
+        flip_consecutive(i, 2);
+    }
+
+    /** Volteja k monedes consecutives començant a start (circular) */
+    public void flip_consecutive(int start, int k){
+        for (int j = 0; j < k; j++) {
+            int pos = (start + j) % board.length;
+            board[pos] = 1 - board[pos];
+        }
     }
 
     /* Heuristic function */
@@ -54,6 +62,10 @@ public class ProbIA5Board {
             }
          }
          return true;
+     }
+
+     public int getSize() {
+         return board.length;
      }
 
      // Some functions will be needed for creating a copy of the state

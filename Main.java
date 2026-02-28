@@ -19,14 +19,16 @@ public class Main {
          *  For a problem to be solvable:
          *    count(0,prob) % 2 == count(0,sol) %2
          */
-        int [] prob = new int []{1 ,0, 1, 1, 0};
-        int [] sol = new int[]{1, 1, 0, 1, 0};
+        int [] prob = new int []{0 ,0, 0, 0, 0, 0, 0, 0};
+        int [] sol = new int[]  {1, 1, 1, 1, 1, 1, 1, 1};
 
         ProbIA5Board board = new ProbIA5Board(prob, sol );
 
         // Create the Problem object
+        // ProbIA5SuccesorFunction(2) = parelles (original)
+        // ProbIA5SuccesorFunction(4) = grups de 4
         Problem p = new  Problem(board,
-                                new ProbIA5SuccesorFunction(),
+                                new ProbIA5SuccesorFunction(4),
                                 new ProbIA5GoalTest(),
                                 new ProbIA5HeuristicFunction());
 
