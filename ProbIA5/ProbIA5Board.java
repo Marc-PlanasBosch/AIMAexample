@@ -28,23 +28,45 @@ public class ProbIA5Board {
 
     }
 
-    /* vvvvv TO COMPLETE vvvvv */
     public void flip_it(int i){
-      
+        board[i] = 1 - board[i];
+        board[(i + 1) % board.length] = 1 - board[(i + 1) % board.length];
     }
 
     /* Heuristic function */
     public double heuristic(){
         // compute the number of coins out of place respect to solution
-       
+        int heuristic = 0;
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] != solution[i]) {
+                heuristic++;
+            }
+        }
+        return heuristic;
     }
 
      /* Goal test */
      public boolean is_goal(){
          // compute if board = solution
-
+         for (int i = 0; i < board.length; i++) {
+            if (board[i] != solution[i]) {
+                return false;
+            }
+         }
+         return true;
      }
 
+     // Some functions will be needed for creating a copy of the state
+     public ProbIA5Board(ProbIA5Board original) {
+        // Creem un nou array amb la mateixa mida
+        board = new int[original.board.length];
+        
+        // Copiem els valors un per un
+        for (int i = 0; i < board.length; i++) {
+            board[i] = original.board[i];
+        }
+        // Nota: solution és static, no cal copiar-la (és compartida)
+    }
 
 
 }
