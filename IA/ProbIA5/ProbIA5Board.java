@@ -4,28 +4,20 @@ package IA.ProbIA5;
  * Created by bejar on 17/01/17.
  */
 public class ProbIA5Board {
-    /* Class independent from AIMA classes
-       - It has to implement the state of the problem and its operators
-     *
-
     /* State data structure
-        vector with the parity of the coins (we can assume 0 = heads, 1 = tails
+       vector with the parity of the coins (0 = heads, 1 = tails)
      */
-
     private int [] board;
     private static int [] solution;
 
     /* Constructor */
     public ProbIA5Board(int []init, int[] goal) {
-
         board = new int[init.length];
         solution = new int[init.length];
-
         for (int i = 0; i< init.length; i++) {
             board[i] = init[i];
             solution[i] = goal[i];
         }
-
     }
 
     /** Volteja 2 monedes consecutives (posicions i i i+1, circular) */
@@ -37,6 +29,13 @@ public class ProbIA5Board {
     public void flip_consecutive(int start, int k){
         for (int j = 0; j < k; j++) {
             int pos = (start + j) % board.length;
+            board[pos] = 1 - board[pos];
+        }
+    }
+
+    /** Volteja k monedes a les posicions donades (no consecutives) */
+    public void flip_at(int... positions){
+        for (int pos : positions) {
             board[pos] = 1 - board[pos];
         }
     }
@@ -66,6 +65,10 @@ public class ProbIA5Board {
 
      public int getSize() {
          return board.length;
+     }
+
+     public int[] getConfiguration() {
+         return board.clone();
      }
 
      // Some functions will be needed for creating a copy of the state
